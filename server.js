@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 
 // Importar las funciones del gestor de frutas
-const { leerFrutas, guardarFrutas,getIdFruta,deleteFruta,updateFruta } = require("./src/frutasManager");
+const { leerFrutas, guardarFrutas,getIdFruta,deleteFruta,updateFruta,postFruta } = require("./src/frutasManager");
 
 // Configurar el número de puerto para el servidor
 const PORT = process.env.PORT || 3000;
@@ -37,30 +37,13 @@ app.get('/id/:id', (req, res) => {
 });
 
 
-
-
-
-
-
-// Ruta para agregar una nueva fruta al arreglo y guardar los cambios
+//agregar fruta
 app.post("/", (req, res) => {
     const nuevaFruta = req.body;
-    
-    //let cargarFruta=postFruta(nuevaFruta)
-
-    
-    const existeFrutaDatabase  = BD.find((database) => database.id === nuevaFruta.id);
-    if (!existeFrutaDatabase) {
-    res.status(201).res.send("Error. El Id no corresponde a una fruta existente en la base de datos.");
-    }else{
-    BD.push(existeFrutaDatabase); // Agregar la nueva fruta al arreglo
-    guardarFrutas(BD); // Guardar los cambios en el archivo
-    res.status(201).send("Fruta agregada!"); // Enviar una respuesta exitosa
-  }
+    postFruta(nuevaFruta)
+  .then((nuevaFruta) => res.status(201).send(nuevaFruta))
+    .catch((error) => res.status(400).send(error.message));
 });
-
-
-
 
 
 // Actualizar una fruta
@@ -74,7 +57,7 @@ app.put('/id/:id', (req, res) => {
 });
 
 
-
+//borrar fruta
 app.delete('/id/:id', (req, res) => {
   const { id } = req.params;
 
