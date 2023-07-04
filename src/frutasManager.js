@@ -29,7 +29,7 @@ if (!idFrutaDatabase){
   await guardarFrutas(database);
 
 }else{
-    throw new Error("Error. El metodo es post y esa  fruta ya existente en la base de datos...prueba con put para actualizar alguna fruta");
+    throw new Error("Error. El metodo es post y esa  fruta ya existente con ese ID en la base de datos...prueba con el metodo put para actualizar alguna fruta");
 }
 return agregarFruta;
 }

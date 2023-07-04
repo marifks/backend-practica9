@@ -46,7 +46,7 @@ app.post("/", (req, res) => {
 });
 
 
-// Actualizar una fruta
+// Actualizar una fruta especificando su id en la url
 app.put('/id/:id', (req, res) => {
   const { id } = req.params;
   const { imagen, nombre, importe, stock} = req.body;
@@ -57,7 +57,7 @@ app.put('/id/:id', (req, res) => {
 });
 
 
-//borrar fruta
+//borrar fruta 
 app.delete('/id/:id', (req, res) => {
   const { id } = req.params;
 
